@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Instinct Esports Form</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; font-family:Arial,sans-serif; display:flex; flex-direction:column; }
+
+    /* Background Black-Red Animation */
+    body {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      background: linear-gradient(45deg, #ff0000, #000000, #ff0000);
+      background-size:400% 400%;
+      animation: rgbBackground 10s infinite;
+    }
+    @keyframes rgbBackground {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* Form Container */
+    .form-container {
+      background: rgba(255,255,255,0.9);
+      border-radius:15px;
+      padding:30px 40px;
+      max-width:400px;
+      width:90%;
+      box-shadow:0 8px 16px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% {opacity:0; transform:translateY(50px);}
+      100% {opacity:1; transform:translateY(0);}
+    }
+    .form-container h2 {
+      text-align:center;
+      color:#2c3e50;
+      margin-bottom:20px;
+    }
+    .form-container label { display:block; margin-top:15px; font-weight:bold; }
+    .form-container input {
+      width:100%; padding:10px; margin-top:5px; border:1px solid #ccc; border-radius:5px;
+    }
+    .form-container button {
+      margin-top:20px; width:100%; padding:12px;
+      background-color:#e74c3c; color:white; border:none; border-radius:5px;
+      font-size:18px; cursor:pointer; transition:0.3s;
+    }
+    .form-container button:hover { background-color:#c0392b; }
+
+    /* Footer Section */
+    footer {
+      width:100%; text-align:center; padding:15px;
+      font-size:20px; font-weight:bold; position:fixed; bottom:0; left:0;
+      background:black; color:white; animation:textAnimation 2s infinite alternate;
+    }
+    @keyframes textAnimation { 0%{color:white;} 100%{color:gray;} }
+</style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Hello There. Give Some Information √</h2>
+    <form id="myForm">
+      <label for="name">1. Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required />
+
+      <label for="uid">2. UID:</label>
+      <input type="text" id="uid" name="uid" placeholder="Enter your UID" required />
+
+      <label for="level">3. Level:</label>
+      <input type="text" id="level" name="level" placeholder="Enter your level" required />
+
+      <label for="contact">4. Contact:</label>
+      <input type="text" id="contact" name="contact" placeholder="Enter your contact info" required />
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <footer>INSTINCT ESPORTS</footer>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let data = {
+    name: document.getElementById("name").value,
+    uid: document.getElementById("uid").value,
+    level: document.getElementById("level").value,
+    contact: document.getElementById("contact").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbwc0Nr-4KCaa56XfJhSU_utlP8UuCj8RRgsMVKC7n5gh89pFVvu9t8dITE523gvghCw/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => {
+    alert("Submitting Successful. Thanks for choosing us!");
+    document.getElementById("myForm").reset();
+  })
+  .catch(err => alert("Error! Please try again."));
+});
+</script>
+
+</body>
+</html>
